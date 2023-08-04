@@ -11,3 +11,4 @@ pico_sdk_init()
 
 # Rest of the project
 add_subdirectory(projects/hello_world)
+add_subdirectory(projects/internal_temp)

@@ -3,7 +3,9 @@ add_executable(hello_world
 )
 
 # pull in common dependencies
-target_link_libraries(hello_world pico_stdlib)
+target_link_libraries(hello_world
+  pico_stdlib
+)
 
 # enable usb output, disable uart output
 pico_enable_stdio_usb(hello_world 1)
