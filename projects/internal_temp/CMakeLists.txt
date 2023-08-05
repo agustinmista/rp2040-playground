@@ -1,11 +1,14 @@
-add_executable(internal_temp
-  internal_temp.c
-)
+add_executable(internal_temp)
 
 # pull in common dependencies
 target_link_libraries(internal_temp
   pico_stdlib
   hardware_adc
+)
+
+# add some source code files
+target_sources(internal_temp PRIVATE
+  internal_temp.c
 )
 
 # enable usb output, disable uart output

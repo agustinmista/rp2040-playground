@@ -1,10 +1,13 @@
-add_executable(hello_world
-  hello_world.c
-)
+add_executable(hello_world)
 
 # pull in common dependencies
 target_link_libraries(hello_world
   pico_stdlib
+)
+
+# add some source code files
+target_sources(hello_world PRIVATE
+  hello_world.c
 )
 
 # enable usb output, disable uart output
