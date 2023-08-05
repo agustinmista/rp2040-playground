@@ -2,8 +2,6 @@
 
 * Description: read and print the internal RP2040 temperature every 1s
 
-* Board: Adafruit QT Py 2040
-
 * Extra components:
   + none
 

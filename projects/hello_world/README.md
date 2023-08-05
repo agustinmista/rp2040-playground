@@ -2,8 +2,6 @@
 
 * Description: print "Hello world" every second to the USB serial
 
-* Board: Adafruit QT Py 2040
-
 * Extra components:
   + none
 
