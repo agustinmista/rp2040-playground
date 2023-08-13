@@ -7,7 +7,9 @@
 			"extensions": [
 				"ms-vscode.makefile-tools",
 				"ms-vscode.cmake-tools",
-				"ms-vscode.cpptools"
+				"ms-vscode.cpptools",
+				"marus25.cortex-debug",
+				"chris-hock.pioasm"
 			]
 		}
 	}

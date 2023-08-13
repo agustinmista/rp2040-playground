@@ -18,4 +18,7 @@
     },
     "C_Cpp.clang_format_style": "{ BasedOnStyle: LLVM, ColumnLimit: 0, AlignAfterOpenBracket: BlockIndent }",
     "editor.formatOnSave": true,
+    "files.associations": {
+        "stdlib.h": "c"
+    },
 }
