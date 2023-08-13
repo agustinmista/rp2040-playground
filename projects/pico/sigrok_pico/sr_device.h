@@ -1,5 +1,6 @@
-#include "stdarg.h"
 #include <string.h>
+
+#include "stdarg.h"
 
 // ------------------------------------
 // Pin usage:

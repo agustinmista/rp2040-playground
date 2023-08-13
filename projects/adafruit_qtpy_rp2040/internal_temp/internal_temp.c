@@ -1,6 +1,8 @@
+#include <stdio.h>
+
+#include "boards/adafruit_qtpy_rp2040.h"
 #include "hardware/adc.h"
 #include "pico/stdlib.h"
-#include <stdio.h>
 
 /* References for this implementation:
  * raspberry-pi-pico-c-sdk.pdf, Section '4.1.1. hardware_adc'

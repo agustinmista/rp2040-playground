@@ -1,6 +1,8 @@
+#include <stdio.h>
+
+#include "boards/adafruit_qtpy_rp2040.h"
 #include "pico/stdlib.h"
 #include "ws2812.pio.h"
-#include <stdio.h>
 
 // Set some NeoPixel pins and stuff
 #define NEOPIXEL_DATA_PIN PICO_DEFAULT_WS2812_PIN
