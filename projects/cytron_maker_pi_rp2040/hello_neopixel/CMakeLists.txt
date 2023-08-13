@@ -7,7 +7,7 @@ pico_generate_pio_header(hello_neopixel
 
 # add the ./include directory
 target_include_directories(hello_neopixel PRIVATE
-  include
+  ../include
 )
 
 # add some source code files
