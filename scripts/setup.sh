@@ -18,10 +18,11 @@ sudo apt-get install -y \
   pkg-config \
   screen \
   texinfo \
+  udev \
   usbutils
 
 echo "*** Initializing submodules"
-git submodule update --init --recursive
+git submodule update --init
 
 echo "*** Building openocd from source"
 cd tools/openocd
