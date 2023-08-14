@@ -1,7 +1,7 @@
 {
 	"name": "RP2040 Playground",
 	"image": "mcr.microsoft.com/devcontainers/base:jammy",
-	"postCreateCommand": ".devcontainer/postCreate.sh",
+	"postCreateCommand": "./scripts/setup.sh",
 	"customizations": {
 		"vscode": {
 			"extensions": [

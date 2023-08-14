@@ -1,6 +1,6 @@
 #include <stdio.h>
 
-#include "boards/cytron_maker_pi_rp2040.h"
+#include "cytron_maker_pi_rp2040.h"
 #include "pico/stdlib.h"
 #include "ws2812.pio.h"
 
