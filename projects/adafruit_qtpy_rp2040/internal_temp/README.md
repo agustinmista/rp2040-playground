@@ -4,10 +4,3 @@
 
 * Extra components:
   + none
-
-* Build steps from (../../build):
-
-  ```bash
-  cmake ..
-  make internal_temp
-  ```

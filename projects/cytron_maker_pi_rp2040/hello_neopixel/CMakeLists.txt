@@ -5,11 +5,6 @@ pico_generate_pio_header(hello_neopixel
   ${CMAKE_CURRENT_LIST_DIR}/ws2812.pio
 )
 
-# # add the ./include directory
-# target_include_directories(hello_neopixel PRIVATE
-#   ../include
-# )
-
 # add some source code files
 target_sources(hello_neopixel PRIVATE
   hello_neopixel.c

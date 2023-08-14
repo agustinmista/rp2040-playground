@@ -16,7 +16,7 @@ target_link_libraries(sigrok_pico
   pico_stdio_usb
 )
 
-# enable usb output, disable uart output
+# enable USB output, disable UART output
 pico_enable_stdio_usb(sigrok_pico 1)
 pico_enable_stdio_uart(sigrok_pico 0)
 

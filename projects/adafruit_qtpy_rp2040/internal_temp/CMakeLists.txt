@@ -11,7 +11,7 @@ target_sources(internal_temp PRIVATE
   internal_temp.c
 )
 
-# enable usb output, disable uart output
+# enable USB output, disable UART output
 pico_enable_stdio_usb(internal_temp 1)
 pico_enable_stdio_uart(internal_temp 0)
 

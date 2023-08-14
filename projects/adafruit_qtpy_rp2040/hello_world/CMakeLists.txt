@@ -10,7 +10,7 @@ target_sources(hello_world PRIVATE
   hello_world.c
 )
 
-# enable usb output, disable uart output
+# enable USB output, disable UART output
 pico_enable_stdio_usb(hello_world 1)
 pico_enable_stdio_uart(hello_world 0)
 
