@@ -1,0 +1,10 @@
+[
+  {
+    "name": "GCC 10.3.1 arm-none-eabi",
+    "compilers": {
+      "C": "/usr/bin/arm-none-eabi-gcc",
+      "CXX": "/usr/bin/arm-none-eabi-g++"
+    },
+    "isTrusted": true
+  }
+]
