@@ -2,6 +2,9 @@
 
 set -e
 
+echo "*** Initializing submodules"
+git submodule update --init
+
 echo "*** Installing system tools"
 sudo apt-get update
 sudo apt-get install -y \
@@ -21,12 +24,11 @@ sudo apt-get install -y \
   udev \
   usbutils
 
-echo "*** Initializing submodules"
-git submodule update --init
-
 echo "*** Building openocd from source"
-cd tools/openocd
+pushd tools/openocd
 ./bootstrap
 ./configure
 make -j8
-sudo make install
+sudo cp contrib/60-openocd.rules /etc/udev/rules.d/
+sudo udevadm control --reload
+popd
