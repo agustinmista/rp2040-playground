@@ -29,6 +29,8 @@ pushd tools/openocd
 ./bootstrap
 ./configure
 make -j8
-sudo cp contrib/60-openocd.rules /etc/udev/rules.d/
-sudo udevadm control --reload
 popd
+
+echo "*** Installing udev rules"
+sudo cp tools/openocd/contrib/60-openocd.rules /etc/udev/rules.d/
+sudo udevadm control --reload
