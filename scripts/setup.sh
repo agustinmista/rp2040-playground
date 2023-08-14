@@ -29,4 +29,3 @@ cd tools/openocd
 ./bootstrap
 ./configure
 make -j8
-sudo make install
