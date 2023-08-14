@@ -15,7 +15,6 @@ sudo apt-get install -y \
   libstdc++-arm-none-eabi-newlib \
   libtool \
   libusb-1.0-0-dev \
-  openocd \
   pkg-config \
   screen \
   texinfo \
@@ -29,3 +28,4 @@ cd tools/openocd
 ./bootstrap
 ./configure
 make -j8
+sudo make install
