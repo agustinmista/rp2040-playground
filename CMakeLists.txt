@@ -9,6 +9,9 @@ pico_sdk_init()
 # Enable warnings
 add_compile_options(-Wall -Wextra)
 
+# Define the location of external libraries
+add_subdirectory("tools/Pico-PIO-USB" pico_pio_usb)
+
 # Projects built for Pico
 add_subdirectory(projects/pico/sigrok_pico)
 
