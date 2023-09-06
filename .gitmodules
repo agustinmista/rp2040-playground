@@ -10,3 +10,6 @@
 [submodule "tools/openocd"]
 	path = tools/openocd
 	url = https://github.com/raspberrypi/openocd.git
+[submodule "tools/Pico-PIO-USB"]
+	path = tools/Pico-PIO-USB
+	url = https://github.com/sekigon-gonnoc/Pico-PIO-USB.git
