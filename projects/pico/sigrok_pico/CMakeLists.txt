@@ -1,12 +1,15 @@
-add_executable(sigrok_pico)
+set(target_name sigrok_pico)
+
+# add a new executable target
+add_executable(${target_name})
 
 # add some source code files
-target_sources(sigrok_pico PRIVATE
-  sigrok_pico.c
+target_sources(${target_name} PRIVATE
+  ${target_name}.c
 )
 
 # pull in common dependencies
-target_link_libraries(sigrok_pico
+target_link_libraries(${target_name}
   pico_stdlib
   hardware_adc
   hardware_dma
@@ -17,8 +20,8 @@ target_link_libraries(sigrok_pico
 )
 
 # enable USB output, disable UART output
-pico_enable_stdio_usb(sigrok_pico 1)
-pico_enable_stdio_uart(sigrok_pico 0)
+pico_enable_stdio_usb(${target_name} 1)
+pico_enable_stdio_uart(${target_name} 0)
 
 # create map/bin/hex file etc.
-pico_add_extra_outputs(sigrok_pico)
+pico_add_extra_outputs(${target_name})

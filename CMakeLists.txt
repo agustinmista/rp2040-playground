@@ -6,6 +6,9 @@ project(my_projects)
 
 pico_sdk_init()
 
+# Enable warnings
+add_compile_options(-Wall -Wextra)
+
 # Projects built for Pico
 add_subdirectory(projects/pico/sigrok_pico)
 
