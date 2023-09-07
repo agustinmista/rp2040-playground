@@ -10,7 +10,7 @@ pico_generate_pio_header(${target_name}
 
 # add some source code files
 target_sources(${target_name} PRIVATE
-  ${target_name}.c
+  ${CMAKE_CURRENT_LIST_DIR}/main.c
 )
 
 # pull in common dependencies

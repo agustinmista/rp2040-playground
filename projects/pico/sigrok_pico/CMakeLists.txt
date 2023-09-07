@@ -5,7 +5,7 @@ add_executable(${target_name})
 
 # add some source code files
 target_sources(${target_name} PRIVATE
-  ${target_name}.c
+  ${CMAKE_CURRENT_LIST_DIR}/main.c
 )
 
 # pull in common dependencies
@@ -17,6 +17,11 @@ target_link_libraries(${target_name}
   hardware_sync
   pico_multicore
   pico_stdio_usb
+)
+
+# disable warnings in this mess
+target_compile_options(${target_name} PRIVATE
+  -w
 )
 
 # enable USB output, disable UART output

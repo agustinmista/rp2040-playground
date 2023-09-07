@@ -1,16 +1,31 @@
 cmake_minimum_required(VERSION 3.13)
 
+#--------------------------------------
+# Main project configuration
+#--------------------------------------
+
+# Bring the pico-sdk into scope
 include(tools/pico-sdk/pico_sdk_init.cmake)
 
+# Start a project
 project(my_projects)
 
-pico_sdk_init()
+# Set pico-sdk flags
+set(CMAKE_BUILD_TYPE Debug)   # Set to "Release" after debugging
+set(PICO_DEOPTIMIZED_DEBUG 1) # Set to 0 after debugging
 
-# Enable warnings
+# Enable all compiler warnings
 add_compile_options(-Wall -Wextra)
 
-# Define the location of external libraries
+# Initialize the pico-sdk
+pico_sdk_init()
+
+# Add external libraries
 add_subdirectory("tools/Pico-PIO-USB" pico_pio_usb)
+
+#--------------------------------------
+# Individual projects
+#--------------------------------------
 
 # Projects built for Pico
 add_subdirectory(projects/pico/sigrok_pico)
