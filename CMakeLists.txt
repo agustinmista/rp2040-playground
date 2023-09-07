@@ -29,6 +29,7 @@ add_subdirectory("tools/Pico-PIO-USB" pico_pio_usb)
 
 # Projects built for Pico
 add_subdirectory(projects/pico/sigrok_pico)
+add_subdirectory(projects/pico/usb_hid_bridge)
 
 # Projects built for Adafruit QT Py RP2040
 add_subdirectory(projects/adafruit_qtpy_rp2040/hello_world)
