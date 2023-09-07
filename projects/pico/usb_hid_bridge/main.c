@@ -14,11 +14,13 @@
 
 // Invoked when device is mounted
 void tud_mount_cb(void) {
+  printf("[device] device mounted\n");
   ; // TODO
 }
 
 // Invoked when device is unmounted
 void tud_umount_cb(void) {
+  printf("[device] device unmounted\n");
   ; // TODO
 }
 
@@ -28,11 +30,13 @@ void tud_umount_cb(void) {
 void tud_suspend_cb(bool remote_wakeup_en) {
   (void)remote_wakeup_en;
 
+  printf("[device] USB bus suspended\n");
   ; // TODO
 }
 
 // Invoked when USB bus is resumed
 void tud_resume_cb(void) {
+  printf("[device] USB bus resumed\n");
   ; // TODO
 }
 
@@ -46,6 +50,7 @@ uint16_t tud_hid_get_report_cb(uint8_t instance, uint8_t report_id, hid_report_t
   (void)buffer;
   (void)reqlen;
 
+  printf("[device] received GET_REPORT request\n");
   ; // TODO
 
   return 0;
@@ -60,6 +65,7 @@ void tud_hid_set_report_cb(uint8_t instance, uint8_t report_id, hid_report_type_
   (void)buffer;
   (void)bufsize;
 
+  printf("[device] received SET_REPORT request or data on OUT endpoint\n");
   ; // TODO
 }
 
@@ -76,6 +82,7 @@ void tuh_hid_mount_cb(uint8_t dev_addr, uint8_t instance, uint8_t const *desc_re
   (void)desc_report;
   (void)desc_len;
 
+  printf("[host] device mounted\n");
   ; // TODO
 }
 
@@ -84,6 +91,7 @@ void tuh_hid_umount_cb(uint8_t dev_addr, uint8_t instance) {
   (void)dev_addr;
   (void)instance;
 
+  printf("[host] device unmounted\n");
   ; // TODO
 }
 
@@ -94,6 +102,7 @@ void tuh_hid_report_received_cb(uint8_t dev_addr, uint8_t instance, uint8_t cons
   (void)report;
   (void)len;
 
+  printf("[host] received report\n");
   ; // TODO
 }
 
@@ -102,17 +111,16 @@ void tuh_hid_report_received_cb(uint8_t dev_addr, uint8_t instance, uint8_t cons
 //-------------------------------------
 
 void core0_main() {
-  uint32_t counter0 = 0;
-
-  printf("core0_main started\n");
+  printf("[core0] started\n");
 
   // Init device stack on native USB port
-  // tud_init(BOARD_TUD_RHPORT);
+  printf("[core0] initializing USB device stack\n");
+  tud_init(BOARD_TUD_RHPORT);
 
   // Enter core0 loop
+  printf("[core0] entering loop\n");
   while (true) {
-    counter0++;
-    // tud_task();
+    tud_task();
   }
 }
 
@@ -121,28 +129,16 @@ void core0_main() {
 //-------------------------------------
 
 void core1_main() {
-  uint32_t counter1 = 0;
-
-  printf("core1_main started\n");
-
-  const uint LED_PIN = PICO_DEFAULT_LED_PIN;
-  gpio_init(LED_PIN);
-  gpio_set_dir(LED_PIN, GPIO_OUT);
-
-  while (true) {
-    gpio_put(LED_PIN, 1);
-    sleep_ms(250);
-    gpio_put(LED_PIN, 0);
-    sleep_ms(250);
-  }
+  printf("[core1] started\n");
 
   // Init host stack on simulated USB port
-  // tuh_init(BOARD_TUH_RHPORT);
+  printf("[core1] initializing USB host stack\n");
+  tuh_init(BOARD_TUH_RHPORT);
 
   // Enter core1 loop
+  printf("[core0] entering loop\n");
   while (true) {
-    counter1++;
-    // tuh_task();
+    tuh_task();
   }
 }
 
@@ -153,14 +149,11 @@ void core1_main() {
 int main(void) {
   sleep_ms(100); // Don't do anything while the debugger restarts the board
 
-  stdio_uart_init();
-  printf("Hello!\n");
-
-  printf("Setting sys_clock to 120Mhz\n");
   set_sys_clock_khz(120000, true); // sys_clock must be a multiple of 12MHz
   sleep_ms(10);
 
-  printf("Starting core1\n");
+  stdio_uart_init();
+
   multicore_reset_core1();
   multicore_launch_core1(core1_main);
 

@@ -7,8 +7,8 @@
 
 #define USB_VID 0xCAFE
 
-#define PID_BIT(itf, n) ((CFG_TUD_##itf) << (n))
-#define USB_PID (0x4000 | PID_BIT(CDC, 0) | PID_BIT(MSC, 1) | PID_BIT(HID, 2) | PID_BIT(MIDI, 3) | PID_BIT(VENDOR, 4))
+#define PID_MASK(itf, n) ((CFG_TUD_##itf) << (n))
+#define USB_PID (0x4000 | PID_MASK(CDC, 0) | PID_MASK(MSC, 1) | PID_MASK(HID, 2) | PID_MASK(MIDI, 3) | PID_MASK(VENDOR, 4))
 
 tusb_desc_device_t const desc_device = {
     .bLength = sizeof(tusb_desc_device_t),
@@ -54,7 +54,6 @@ uint8_t const *tud_hid_descriptor_report_cb(uint8_t itf) {
 //-------------------------------------
 
 uint8_t const desc_configuration[] = {
-
     TUD_CONFIG_DESCRIPTOR(
         1,                                      // Config number
         1,                                      // Interface count
@@ -87,19 +86,11 @@ uint8_t const *tud_descriptor_configuration_cb(uint8_t index) {
 
 char pico_serial[2 * PICO_UNIQUE_BOARD_ID_SIZE_BYTES + 1];
 
-// String Descriptor Index
-enum {
-  STRID_LANGID = 0,
-  STRID_MANUFACTURER,
-  STRID_PRODUCT,
-  STRID_SERIAL,
-};
-
 // array of pointer to string descriptors
 char const *string_desc_arr[] = {
     (const char[]){0x09, 0x04}, // 0: Supported language is English (0x0409)
-    "TinyUSB",                  // 1: Manufacturer
-    "TinyUSB Device",           // 2: Product
+    "Raspberry Pi",             // 1: Manufacturer
+    "HID Bridge",               // 2: Product
     pico_serial,                // 3: Serial number using pico's unique board id
 };
 
@@ -107,49 +98,44 @@ static uint16_t _desc_str[32 + 1];
 
 // Invoked when received GET STRING DESCRIPTOR request
 // Application return pointer to descriptor, whose contents must exist long enough for transfer to complete
+// NOTE: the 0xEE index string is a Microsoft OS 1.0 Descriptors
+// https://docs.microsoft.com/en-us/windows-hardware/drivers/usbcon/microsoft-defined-usb-descriptors
 uint16_t const *tud_descriptor_string_cb(uint8_t index, uint16_t langid) {
   (void)langid;
-  size_t chr_count;
 
-  switch (index) {
+  uint8_t chr_count;
 
-  case STRID_LANGID:
+  if (index == 0) {
+
     memcpy(&_desc_str[1], string_desc_arr[0], 2);
     chr_count = 1;
-    break;
 
-  case STRID_SERIAL:
-    pico_get_unique_board_id_string(pico_serial, sizeof(pico_serial));
-    chr_count = sizeof(pico_serial);
-    break;
+  } else {
 
-  default:
-    // Note: the 0xEE index string is a Microsoft OS 1.0 Descriptors.
-    // https://docs.microsoft.com/en-us/windows-hardware/drivers/usbcon/microsoft-defined-usb-descriptors
     if (!(index < sizeof(string_desc_arr) / sizeof(string_desc_arr[0]))) {
       return NULL;
+    }
+
+    if (index == 3) {
+      pico_get_unique_board_id_string(pico_serial, sizeof(pico_serial));
     }
 
     const char *str = string_desc_arr[index];
 
     // Cap at max char
     chr_count = strlen(str);
-    size_t const max_count = sizeof(_desc_str) / sizeof(_desc_str[0]) - 1; // -1 for string type
-
-    if (chr_count > max_count) {
-      chr_count = max_count;
+    if (chr_count > 31) {
+      chr_count = 31;
     }
 
     // Convert ASCII string into UTF-16
-    for (size_t i = 0; i < chr_count; i++) {
+    for (uint8_t i = 0; i < chr_count; i++) {
       _desc_str[1 + i] = str[i];
     }
-
-    break;
   }
 
-  // First byte is length (including header), second byte is string type
-  _desc_str[0] = (uint16_t)((TUSB_DESC_STRING << 8) | (2 * chr_count + 2));
+  // first byte is length (including header), second byte is string type
+  _desc_str[0] = (TUSB_DESC_STRING << 8) | (2 * chr_count + 2);
 
   return _desc_str;
 }

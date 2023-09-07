@@ -40,7 +40,7 @@ extern "C" {
 // Class-specific configuration
 
 // HID buffer size should be sufficient to hold ID (if any) + data
-#define CFG_TUD_HID_EP_BUFSIZE 64
+#define CFG_TUD_HID_EP_BUFSIZE 16
 
 //-------------------------------------
 // HOST CONFIGURATION
@@ -56,6 +56,9 @@ extern "C" {
 
 // Use Pico-PIO-USB
 #define CFG_TUH_RPI_PIO_USB 1
+
+// Use pins 2 and 3 instead of 0 and 1 (used by default UART)
+#define PIO_USB_DP_PIN_DEFAULT 2
 
 // Size of buffer to hold descriptors and other data used for enumeration
 #define CFG_TUH_ENUMERATION_BUFSIZE 256
