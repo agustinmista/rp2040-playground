@@ -9,7 +9,8 @@
 				"ms-vscode.cmake-tools",
 				"ms-vscode.cpptools",
 				"marus25.cortex-debug",
-				"chris-hock.pioasm"
+				"chris-hock.pioasm",
+				"ms-vscode.vscode-serial-monitor"
 			]
 		}
 	}

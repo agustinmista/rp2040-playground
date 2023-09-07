@@ -22,5 +22,5 @@
     "*.h": "c"
   },
   "cortex-debug.openocdPath": "tools/openocd/src/openocd",
-  "cortex-debug.variableUseNaturalFormat": true
+  "cortex-debug.variableUseNaturalFormat": false
 }

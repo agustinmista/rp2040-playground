@@ -16,9 +16,8 @@
       ],
       "svdFile": "tools/pico-sdk/src/rp2040/hardware_regs/rp2040.svd",
       "runToEntryPoint": "main",
-      "postRestartCommands": [
-        "break main",
-        "continue"
+      "postLaunchCommands": [
+        "monitor rp2040.core1 arp_reset assert 0; rp2040.core0 arp_reset assert 0; reset halt"
       ],
       "searchDir": [
         "tools/openocd/tcl"
@@ -26,10 +25,6 @@
       "openOCDLaunchCommands": [
         "adapter speed 5000"
       ],
-      "liveWatch": {
-        "enabled": true,
-        "samplesPerSecond": 4
-      }
     }
   ]
 }
